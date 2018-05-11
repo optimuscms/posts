@@ -1,0 +1,21 @@
+{
+    "name": "optimuscms/posts",
+    "description": "",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jack Robertson",
+            "email": "jack@optixsolutions.co.uk"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^5.6",
+        "optix/publishable": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Optimus\\Posts\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}
