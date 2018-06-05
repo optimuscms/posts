@@ -4,7 +4,7 @@ namespace Optimus\Posts;
 
 class PostTag extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug'];
 
     public function posts()
     {

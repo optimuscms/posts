@@ -13,7 +13,6 @@ class Post extends Resource
             'title' => $this->title,
             'slug' => $this->slug,
             'body' => $this->body,
-            // Todo: Author
             'tags' => PostTag::collection($this->tags),
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at

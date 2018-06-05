@@ -13,7 +13,6 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('body');
-            $table->unsignedInteger('author_id')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

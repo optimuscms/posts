@@ -2,18 +2,15 @@
 
 namespace Optimus\Posts;
 
-use Optix\Publishable\Publishable;
+use Optix\Draftable\Draftable;
 
 class Post extends Model
 {
-    use Publishable;
+    use Draftable;
 
-    protected $fillable = ['title', 'body', 'published_at', 'has_comments'];
-
-    public function author()
-    {
-        return $this->belongsTo(AdminUser::class);
-    }
+    protected $fillable = [
+        'title', 'body', 'published_at', 'has_comments'
+    ];
 
     public function tags()
     {

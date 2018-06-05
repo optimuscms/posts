@@ -10,23 +10,18 @@ class PostServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        // Todo
-
         $this->mapAdminRoutes();
     }
 
     protected function mapAdminRoutes()
     {
         Route::prefix('api')
-             ->middleware('admin')
+             ->middleware('api', 'auth:api')
              ->namespace($this->controllerNamespace)
              ->group(function () {
                  Route::apiResource('posts', 'PostsController');
                  Route::apiResource('post-tags', 'PostTagsController');
-
-                 Route::get('post-comments', 'PostCommentsController@index');
-                 Route::get('post-comments/{id}', 'PostCommentsController@show');
-                 Route::delete('post-comments/{id}', 'PostCommentsController@destroy');
+                 Route::apiResource('post-comments', 'PostCommentsController')->except(['store', 'update']);
              });
     }
 }

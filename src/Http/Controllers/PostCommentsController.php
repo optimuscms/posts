@@ -2,13 +2,12 @@
 
 namespace Optimus\Posts\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Optimus\Posts\PostComment;
 
 class PostCommentsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $comments = PostComment::all();
 
