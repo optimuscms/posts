@@ -28,9 +28,7 @@ class PostsController extends Controller
             );
         }
 
-        if (! empty($tags = $request->input('tags'))) {
-            $post->tags()->attach($tags);
-        }
+        $post->tags()->attach($request->input('tags'));
 
         return new PostResource($post);
     }
@@ -58,7 +56,7 @@ class PostsController extends Controller
             );
         }
 
-        $post->tags()->sync($request->input('tags', []));
+        $post->tags()->sync($request->input('tags'));
 
         return new PostResource($post);
     }
