@@ -19,6 +19,13 @@
             "Optimus\\Posts\\": "src"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Optimus\\Providers\\PostServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }

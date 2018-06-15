@@ -2,10 +2,8 @@
 
 return [
 
-    'slug' => 'news',
+    'prefix' => 'news',
 
-    'imageConversions' => [
-        //
-    ]
+    'imageConversions' => []
 
 ];
