@@ -3,6 +3,7 @@
 namespace Optimus\Posts\Providers;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class PostServiceProvider extends ServiceProvider
 {
@@ -10,18 +11,28 @@ class PostServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->loadMigrationsFrom(
+            __DIR__ . '/../../database/migrations'
+        );
+
+        $this->publishes([
+            __DIR__ . '/../../config/post.php' => config_path('post.php')
+        ], 'config');
+
         $this->mapAdminRoutes();
     }
 
     protected function mapAdminRoutes()
     {
         Route::prefix('api')
-             ->middleware('api', 'auth:api')
+             ->middleware('api', 'auth:admin')
              ->namespace($this->controllerNamespace)
              ->group(function () {
                  Route::apiResource('posts', 'PostsController');
-                 Route::apiResource('post-tags', 'PostTagsController');
-                 Route::apiResource('post-comments', 'PostCommentsController')->except(['store', 'update']);
+                 Route::apiResource('post-tags', 'TagsController');
+                 Route::apiResource('post-comments', 'CommentsController')->except([
+                     'store', 'update'
+                 ]);
              });
     }
 }

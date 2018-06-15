@@ -44,7 +44,8 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->string('author')->nullable();
             $table->string('author_email')->nullable();
-            $table->string();
+            $table->string('author_website')->nullable();
+            $table->timestamps();
         });
     }
 

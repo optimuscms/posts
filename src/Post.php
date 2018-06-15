@@ -2,15 +2,40 @@
 
 namespace Optimus\Posts;
 
+use Optix\Media\HasMedia;
+use Illuminate\Http\Request;
+use Spatie\Sluggable\HasSlug;
 use Optix\Draftable\Draftable;
+use Spatie\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model
 {
-    use Draftable;
+    use HasMedia, HasSlug, Draftable;
+
+    protected $dates = ['published_at'];
 
     protected $fillable = [
-        'title', 'body', 'published_at', 'has_comments'
+        'title', 'body', 'published_at'
     ];
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
+    }
+
+    public function scopeLatest(Builder $query)
+    {
+        $query->orderBy('published_at', 'desc');
+    }
+
+    public function scopeFilter(Builder $query, Request $request)
+    {
+        //
+    }
 
     public function tags()
     {

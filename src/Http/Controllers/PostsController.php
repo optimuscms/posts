@@ -2,15 +2,16 @@
 
 namespace Optimus\Posts\Http\Controllers;
 
+use Optimus\Posts\Post;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Optimus\Posts\Post;
+use Optimus\Posts\Http\Resources\Post as PostResource;
 
 class PostsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::withDrafts()->all();
+        $posts = Post::withDrafts()->filter($request)->get();
 
         return PostResource::collection($posts);
     }
@@ -19,14 +20,13 @@ class PostsController extends Controller
     {
         $this->validatePost($request);
 
-        $post = Post::create([
-            'title' => $request->input('title'),
-            'body' => $request->input('body'),
-            'author_id' => $request->input('author_id'),
-            'published_at' => $request->input('published_at')
-        ]);
+        $post = Post::create($request->all());
 
-        // Todo: Save images.
+        if ($request->filled('image')) {
+            $post->attachMedia(
+                $request->input('image'), 'image', config('post.imageConversions')
+            );
+        }
 
         if (! empty($tags = $request->input('tags'))) {
             $post->tags()->attach($tags);
@@ -48,18 +48,19 @@ class PostsController extends Controller
 
         $this->validatePost($request);
 
-        $post->update([
-            'title' => $request->input('title'),
-            'body' => $request->input('body'),
-            'author_id' => $request->input('author_id'),
-            'published_at' => $request->input('published_at')
-        ]);
+        $post->update($request->all());
 
-        // Todo: Sync images.
+        $post->detachMedia();
 
-        $post->tags()->sync($request->input('tags'));
+        if ($request->filled('image')) {
+            $post->attachMedia(
+                $request->input('image'), 'image', config('post.imageConversions')
+            );
+        }
 
-        return response(null, 204);
+        $post->tags()->sync($request->input('tags', []));
+
+        return new PostResource($post);
     }
 
     public function destroy($id)
@@ -73,11 +74,11 @@ class PostsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'body' => 'required|string',
-            'author_id' => 'exists:admin_users,id|nullable',
-            'tags' => 'required|array',
-            'tags.*' => 'exists:post_tags,id',
-            'published_at' => 'required|date',
+            'body' => 'required',
+            'image' => 'exists:media,id|nullable',
+            'tags' => 'required|array|min:1',
+            'tags.*' => 'required|exists:post_tags,',
+            'published_at' => 'date|nullable'
         ]);
     }
 }

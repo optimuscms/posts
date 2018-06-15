@@ -2,23 +2,24 @@
 
 namespace Optimus\Posts\Http\Controllers;
 
-use Illuminate\Routing\Controller;
 use Optimus\Posts\PostComment;
+use Illuminate\Routing\Controller;
+use Optimus\Posts\Http\Resources\Comment as CommentResource;
 
-class PostCommentsController extends Controller
+class CommentsController extends Controller
 {
     public function index()
     {
         $comments = PostComment::all();
 
-        return PostCommentResource::collection($comments);
+        return CommentResource::collection($comments);
     }
 
     public function show($id)
     {
         $comment = PostComment::findOrFail($id);
 
-        return new PostCommentResource($comment);
+        return new CommentResource($comment);
     }
 
     public function destroy($id)
