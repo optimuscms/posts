@@ -11,7 +11,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('body');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
         Schema::create('post_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
 
@@ -41,11 +41,17 @@ class CreatePostsTable extends Migration
 
         Schema::create('post_comments', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('post_id')->index();
             $table->text('body');
             $table->string('author')->nullable();
             $table->string('author_email')->nullable();
             $table->string('author_website')->nullable();
             $table->timestamps();
+
+            $table->foreign('post_id')
+                  ->refernces('id')
+                  ->on('posts')
+                  ->onDelete('cascade');
         });
     }
 
