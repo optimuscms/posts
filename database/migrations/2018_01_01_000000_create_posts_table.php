@@ -49,7 +49,7 @@ class CreatePostsTable extends Migration
             $table->timestamps();
 
             $table->foreign('post_id')
-                  ->refernces('id')
+                  ->references('id')
                   ->on('posts')
                   ->onDelete('cascade');
         });
