@@ -11,7 +11,7 @@ class TagsController extends Controller
 {
     public function index()
     {
-        $tags = PostTag::orderBy('name', 'asc')->all();
+        $tags = PostTag::orderBy('name', 'asc')->get();
 
         return TagResource::collection($tags);
     }
