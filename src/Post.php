@@ -39,7 +39,7 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(PostTag::class);
+        return $this->belongsToMany(PostTag::class, 'post_tag');
     }
 
     public function comments()
