@@ -2,27 +2,29 @@
 
 namespace Optimus\Posts\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Optimus\Posts\Models\PostCategory;
+use Optimus\Posts\Http\Requests\CategoryRequest;
 use Optimus\Posts\Http\Resources\Category as CategoryResource;
 
 class CategoriesController extends Controller
 {
     public function index()
     {
-        $tags = PostCategory::orderBy('name', 'asc')->get();
+        $categories = PostCategory::orderBy('name', 'asc')->get();
 
-        return CategoryResource::collection($tags);
+        return CategoryResource::collection($categories);
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $request->validate(['name' => 'required']);
+        $category = new PostCategory();
 
-        $tag = PostCategory::create($request->all());
+        $category->name = $request->input('name');
 
-        return new CategoryResource($tag);
+        $category->save();
+
+        return new CategoryResource($category);
     }
 
     public function show($id)
@@ -32,15 +34,15 @@ class CategoriesController extends Controller
         return new CategoryResource($tag);
     }
 
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $tag = PostCategory::findOrFail($id);
+        $category = PostCategory::findOrFail($id);
 
-        $request->validate(['name' => 'required']);
+        $category->name = $request->input('name');
 
-        $tag->update($request->all());
+        $category->save();
 
-        return new CategoryResource($tag);
+        return new CategoryResource($category);
     }
 
     public function destroy($id)

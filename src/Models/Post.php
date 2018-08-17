@@ -9,10 +9,11 @@ use Optix\Draftable\Draftable;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasMedia, HasSlug, Draftable;
+    use HasMedia, HasSlug, Draftable, SoftDeletes;
 
     protected $dates = ['published_at'];
 

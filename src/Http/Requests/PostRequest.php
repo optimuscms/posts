@@ -18,7 +18,7 @@ class PostRequest extends FormRequest
             'body' => 'required',
             'image' => 'exists:media,id|nullable',
             'categories' => 'required|array',
-            'categories.*' => 'required|exists:post_tags,id',
+            'categories.*' => 'required|exists:post_categories,id',
             'published_at' => 'date|nullable'
         ];
     }
