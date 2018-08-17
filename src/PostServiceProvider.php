@@ -4,6 +4,7 @@ namespace Optimus\Posts;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Optimus\Posts\Http\Requests\PostRequest;
 
 class PostServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,9 @@ class PostServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->mapAdminRoutes();
+
+        // Todo: Bind overridable classes to ones specified in the config file.
+        // $this->app->bind(PostRequest::class, config('post.requests.posts'));
     }
 
     protected function mapAdminRoutes()

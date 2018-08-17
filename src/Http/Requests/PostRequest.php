@@ -16,10 +16,14 @@ class PostRequest extends FormRequest
         return $this->isMethod('delete') ? [] : [
             'title' => 'required',
             'body' => 'required',
-            'image' => 'exists:media,id|nullable',
             'categories' => 'required|array',
             'categories.*' => 'required|exists:post_categories,id',
             'published_at' => 'date|nullable'
         ];
+    }
+
+    public function messages()
+    {
+        return [];
     }
 }

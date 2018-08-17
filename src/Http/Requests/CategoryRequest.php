@@ -13,6 +13,13 @@ class CategoryRequest extends FormRequest
 
     public function rules()
     {
-        return $this->isMethod('delete') ? [] : ['name' => 'required'];
+        return $this->isMethod('delete') ? [] : [
+            'name' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [];
     }
 }
