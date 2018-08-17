@@ -22,6 +22,10 @@ class CategoriesController extends Controller
 
         $category->name = $request->input('name');
 
+        if ($request->filled('slug')) {
+            $category->slug = $request->input('slug');
+        }
+
         $category->save();
 
         return new CategoryResource($category);
@@ -29,9 +33,9 @@ class CategoriesController extends Controller
 
     public function show($id)
     {
-        $tag = PostCategory::findOrFail($id);
+        $category = PostCategory::findOrFail($id);
 
-        return new CategoryResource($tag);
+        return new CategoryResource($category);
     }
 
     public function update(CategoryRequest $request, $id)
@@ -39,6 +43,10 @@ class CategoriesController extends Controller
         $category = PostCategory::findOrFail($id);
 
         $category->name = $request->input('name');
+
+        if ($request->filled('slug')) {
+            $category->slug = $request->input('slug');
+        }
 
         $category->save();
 
