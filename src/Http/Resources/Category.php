@@ -4,7 +4,7 @@ namespace Optimus\Posts\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class Tag extends Resource
+class Category extends Resource
 {
     public function toArray($request)
     {

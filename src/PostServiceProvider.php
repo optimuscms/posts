@@ -1,6 +1,6 @@
 <?php
 
-namespace Optimus\Posts\Providers;
+namespace Optimus\Posts;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -11,10 +11,12 @@ class PostServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        // Migrations
         $this->loadMigrationsFrom(
             __DIR__ . '/../../database/migrations'
         );
 
+        // Config
         $this->publishes([
             __DIR__ . '/../../config/post.php' => config_path('post.php')
         ], 'config');
@@ -29,7 +31,7 @@ class PostServiceProvider extends ServiceProvider
              ->namespace($this->controllerNamespace)
              ->group(function () {
                  Route::apiResource('posts', 'PostsController');
-                 Route::apiResource('post-tags', 'TagsController');
+                 Route::apiResource('post-categories', 'CategoriesController');
                  Route::apiResource('post-comments', 'CommentsController')->except([
                      'store', 'update'
                  ]);

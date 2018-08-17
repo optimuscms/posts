@@ -1,6 +1,6 @@
 <?php
 
-namespace Optimus\Posts;
+namespace Optimus\Posts\Models;
 
 use Optix\Media\HasMedia;
 use Illuminate\Http\Request;
@@ -37,9 +37,11 @@ class Post extends Model
         //
     }
 
-    public function tags()
+    public function categories()
     {
-        return $this->belongsToMany(PostTag::class, 'post_tag', 'post_id', 'tag_id');
+        return $this->belongsToMany(
+            PostCategory::class, 'post_category', 'post_id', 'category_id'
+        );
     }
 
     public function comments()

@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Optimus\\Posts\\Providers\\PostServiceProvider"
+                "Optimus\\Posts\\PostServiceProvider"
             ]
         }
     },

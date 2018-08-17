@@ -1,12 +1,12 @@
 <?php
 
-namespace Optimus\Posts;
+namespace Optimus\Posts\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\Model;
 
-class PostTag extends Model
+class PostCategory extends Model
 {
     use HasSlug;
 

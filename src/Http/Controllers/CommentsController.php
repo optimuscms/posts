@@ -2,7 +2,7 @@
 
 namespace Optimus\Posts\Http\Controllers;
 
-use Optimus\Posts\PostComment;
+use Optimus\Posts\Models\PostComment;
 use Illuminate\Routing\Controller;
 use Optimus\Posts\Http\Resources\Comment as CommentResource;
 

@@ -2,33 +2,39 @@
 
 namespace Optimus\Posts\Http\Controllers;
 
-use Optimus\Posts\Post;
 use Illuminate\Http\Request;
+use Optimus\Posts\Models\Post;
 use Illuminate\Routing\Controller;
+use Optimus\Posts\Http\Requests\PostRequest;
 use Optimus\Posts\Http\Resources\Post as PostResource;
 
 class PostsController extends Controller
 {
     public function index(Request $request)
     {
-        $posts = Post::withDrafts()->filter($request)->get();
+        $posts = Post::withDrafts()
+            ->filter($request)
+            ->get();
 
         return PostResource::collection($posts);
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $this->validatePost($request);
+        $post = new Post();
 
-        $post = Post::create($request->all());
+        $post->title = $request->input('title');
 
-        if ($request->filled('image')) {
-            $post->attachMedia(
-                $request->input('image'), 'image', config('post.imageConversions')
-            );
+        if ($request->filled('slug')) {
+            $post->slug = $request->input('slug');
         }
 
-        $post->tags()->attach($request->input('tags'));
+        $post->excerpt = $request->input('excerpt');
+        $post->body = $request->input('body');
+
+        $post->categories()->attach(
+            $request->input('categories')
+        );
 
         return new PostResource($post);
     }
@@ -40,43 +46,32 @@ class PostsController extends Controller
         return new PostResource($post);
     }
 
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
         $post = Post::withDrafts()->findOrFail($id);
 
-        $this->validatePost($request);
+        $post->title = $request->input('title');
 
-        $post->update($request->all());
-
-        $post->detachMedia();
-
-        if ($request->filled('image')) {
-            $post->attachMedia(
-                $request->input('image'), 'image', config('post.imageConversions')
-            );
+        if ($request->filled('slug')) {
+            $post->slug = $request->input('slug');
         }
 
-        $post->tags()->sync($request->input('tags'));
+        $post->excerpt = $request->input('excerpt');
+        $post->body = $request->input('body');
+
+        $post->categories()->sync(
+            $request->input('categories')
+        );
 
         return new PostResource($post);
     }
 
-    public function destroy($id)
+    public function destroy(PostRequest $request, $id)
     {
-        Post::withDrafts()->findOrFail($id)->delete();
+        Post::withDrafts()
+            ->findOrFail($id)
+            ->delete();
 
         return response(null, 204);
-    }
-
-    protected function validatePost(Request $request)
-    {
-        $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-            'image' => 'exists:media,id|nullable',
-            'tags' => 'required|array|min:1',
-            'tags.*' => 'required|exists:post_tags,',
-            'published_at' => 'date|nullable'
-        ]);
     }
 }

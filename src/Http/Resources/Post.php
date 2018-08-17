@@ -14,7 +14,7 @@ class Post extends Resource
             'image' => $this->firstMedia(),
             'slug' => $this->slug,
             'body' => $this->body,
-            'tags' => Tag::collection($this->tags),
+            'categories' => Category::collection($this->categories),
             'published_at' => (string) $this->published_at,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at
