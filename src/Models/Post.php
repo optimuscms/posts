@@ -2,6 +2,7 @@
 
 namespace Optimus\Posts\Models;
 
+use App\Observers\PostObserver;
 use Optix\Media\HasMedia;
 use Illuminate\Http\Request;
 use Spatie\Sluggable\HasSlug;
@@ -20,6 +21,13 @@ class Post extends Model
     protected $fillable = [
         'title', 'body', 'published_at'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        Post::observe(PostObserver::class);
+    }
 
     public function getSlugOptions(): SlugOptions
     {

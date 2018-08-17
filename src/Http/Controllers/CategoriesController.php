@@ -9,6 +9,9 @@ use Optimus\Posts\Http\Resources\Category as CategoryResource;
 
 class CategoriesController extends Controller
 {
+    /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
     public function index()
     {
         $categories = PostCategory::orderBy('name', 'asc')->get();
