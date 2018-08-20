@@ -32,6 +32,7 @@ class PostsController extends Controller
 
         $post->excerpt = $request->input('excerpt');
         $post->body = $request->input('body');
+
         $post->schedule(Carbon::parse(
             $request->input('published_at')
         ));
@@ -58,6 +59,7 @@ class PostsController extends Controller
 
         $post->excerpt = $request->input('excerpt');
         $post->body = $request->input('body');
+
         $post->schedule(Carbon::parse(
             $request->input('published_at')
         ));

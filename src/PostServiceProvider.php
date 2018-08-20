@@ -13,13 +13,11 @@ class PostServiceProvider extends ServiceProvider
     public function boot()
     {
         // Migrations
-        $this->loadMigrationsFrom(
-            __DIR__ . '/../../database/migrations'
-        );
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         // Config
         $this->publishes([
-            __DIR__ . '/../../config/post.php' => config_path('post.php')
+            __DIR__ . '/../config/post.php' => config_path('post.php')
         ], 'config');
 
         $this->mapAdminRoutes();

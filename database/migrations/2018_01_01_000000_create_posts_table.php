@@ -12,30 +12,31 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('slug')->unique();
+            $table->text('excerpt');
             $table->text('body');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('post_tags', function (Blueprint $table) {
+        Schema::create('post_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('slug')->unique();
             $table->timestamps();
         });
 
-        Schema::create('post_tag', function (Blueprint $table) {
+        Schema::create('post_category', function (Blueprint $table) {
             $table->unsignedInteger('post_id')->index();
-            $table->unsignedInteger('tag_id')->index();
+            $table->unsignedInteger('category_id')->index();
 
             $table->foreign('post_id')
                   ->references('id')
                   ->on('posts')
                   ->onDelete('cascade');
 
-            $table->foreign('tag_id')
+            $table->foreign('category_id')
                   ->references('id')
-                  ->on('post_tags')
+                  ->on('post_categories')
                   ->onDelete('cascade');
         });
 
@@ -58,8 +59,8 @@ class CreatePostsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('post_comments');
-        Schema::dropIfExists('post_tag');
-        Schema::dropIfExists('post_tags');
+        Schema::dropIfExists('post_category');
+        Schema::dropIfExists('post_categories');
         Schema::dropIfExists('posts');
     }
 }
