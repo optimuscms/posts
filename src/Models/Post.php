@@ -44,6 +44,11 @@ class Post extends Model
         //
     }
 
+    public function isPublished()
+    {
+        return ! is_null($this->published_at) && $this->published_at <= now();
+    }
+
     public function categories()
     {
         return $this->belongsToMany(

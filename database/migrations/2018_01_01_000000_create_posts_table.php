@@ -16,6 +16,7 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('post_categories', function (Blueprint $table) {

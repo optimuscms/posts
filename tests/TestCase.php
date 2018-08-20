@@ -31,6 +31,8 @@ class TestCase extends BaseTestCase
         $this->withFactories(__DIR__ . '/../database/factories');
 
         EloquentCollection::macro('assertEquals', function ($collection) {
+            Assert::assertCount($this->count(), $collection);
+
             $this->zip($collection)->eachSpread(function ($a, $b) {
                 Assert::assertTrue($a->is($b));
             });

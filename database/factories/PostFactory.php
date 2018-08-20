@@ -8,6 +8,5 @@ $factory->define(Post::class, function (Faker $faker) {
         'title' => $faker->sentence,
         'excerpt' => $faker->paragraph,
         'body' => $faker->paragraph(5),
-        'published_at' => now(),
     ];
 });
