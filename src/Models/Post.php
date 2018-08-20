@@ -18,9 +18,7 @@ class Post extends Model
 
     protected $dates = ['published_at'];
 
-    protected $fillable = [
-        'title', 'body', 'published_at'
-    ];
+    protected $fillable = ['title', 'excerpt', 'body'];
 
     protected static function boot()
     {

@@ -2,39 +2,45 @@
 
 namespace App\Observers;
 
-use Illuminate\Http\Request;
 use Optimus\Posts\Models\Post;
 
 class PostObserver
 {
-    protected $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
-
     public function created(Post $post)
     {
-        $post->categories()->attach(
-            $this->request->input('categories')
-        );
+        $this->attachCategories($post);
 
-        $post->attachMedia(
-            $this->request->input('image'), 'image',
-            (array) config('post.image_conversions')
-        );
+        $this->attachMedia($post);
     }
 
     public function updated(Post $post)
     {
-        $post->categories()->sync(
-            $this->request->input('categories')
-        );
+        $this->syncCategories($post);
 
+        $this->syncMedia($post);
+    }
+
+    protected function attachCategories(Post $post)
+    {
+        $post->categories()->attach(request('categories'));
+    }
+
+    protected function syncCategories(Post $post)
+    {
+        $post->categories()->sync(request('categories'));
+    }
+
+    protected function attachMedia(Post $post)
+    {
+        $post->attachMedia(
+            request('image'), 'image', config('post.image_conversions')
+        );
+    }
+
+    protected function syncMedia(Post $post)
+    {
         $post->syncMedia(
-            $this->request->input('image'), 'image',
-            (array) config('post.image_conversions')
+            request('image'), 'image', config('post.image_conversions')
         );
     }
 }
