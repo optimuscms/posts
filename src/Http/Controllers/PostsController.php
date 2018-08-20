@@ -2,6 +2,7 @@
 
 namespace Optimus\Posts\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Optimus\Posts\Models\Post;
 use Illuminate\Routing\Controller;
@@ -31,10 +32,9 @@ class PostsController extends Controller
 
         $post->excerpt = $request->input('excerpt');
         $post->body = $request->input('body');
-
-        $post->categories()->attach(
-            $request->input('categories')
-        );
+        $post->schedule(Carbon::parse(
+            $request->input('published_at')
+        ));
 
         return new PostResource($post);
     }
@@ -58,10 +58,9 @@ class PostsController extends Controller
 
         $post->excerpt = $request->input('excerpt');
         $post->body = $request->input('body');
-
-        $post->categories()->sync(
-            $request->input('categories')
-        );
+        $post->schedule(Carbon::parse(
+            $request->input('published_at')
+        ));
 
         return new PostResource($post);
     }

@@ -2,7 +2,7 @@
 
 ## Installation
 
-```php
+```bash
 composer require optimuscms/posts
 ```
 
