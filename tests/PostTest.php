@@ -3,6 +3,7 @@
 namespace Optimus\Posts\Tests;
 
 use Optimus\Posts\Models\Post;
+use Optimus\Posts\Models\PostComment;
 use Optimus\Posts\Models\PostCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -91,5 +92,27 @@ class PostTest extends TestCase
         $postTwo = factory(Post::class)->create(['title' => 'Duplicate Title']);
 
         $this->assertNotEquals($postOne->slug, $postTwo->slug);
+    }
+
+//    /** @test */
+//    public function a_post_can_have_media()
+//    {
+//
+//    }
+
+    /** @test */
+    public function a_post_can_have_comments()
+    {
+        $post = factory(Post::class)->create();
+
+        $comments = $post->comments()->saveMany(
+            factory(PostComment::class, 3)->make(['is_approved' => true])
+        );
+
+        $this->assertInstanceOf(
+            EloquentCollection::class, $post->comments
+        );
+
+        $comments->assertEquals($post->comments);
     }
 }

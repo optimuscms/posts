@@ -45,9 +45,10 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('post_id')->index();
             $table->text('body');
-            $table->string('author')->nullable();
-            $table->string('author_email')->nullable();
-            $table->string('author_website')->nullable();
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
 
             $table->foreign('post_id')
