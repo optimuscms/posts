@@ -26,9 +26,17 @@ class CommentTest extends TestCase
     /** @test */
     public function a_comment_is_unapproved_by_default()
     {
-        $comment = factory(PostComment::class)->create();
+        $comment = new PostComment();
 
-        $this->assertFalse($comment->is_approved);
+        $comment->post_id = factory(Post::class)->create()->id;
+
+        $comment->body = 'Comment Body';
+        $comment->name = 'Jack Robertson';
+        $comment->email = 'jack@optixsolutions.co.uk';
+
+        $comment->save();
+
+        $this->assertFalse($comment->fresh()->is_approved);
     }
 
     /** @test */

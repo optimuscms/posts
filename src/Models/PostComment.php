@@ -19,19 +19,24 @@ class PostComment extends Model
     {
         parent::boot();
 
-        self::addGlobalScope('approved', function ($query) {
+        self::addGlobalScope('approved', function (Builder $query) {
             $query->where('is_approved', true);
         });
     }
 
-    public function post()
+    public function scopeWithUnapproved()
     {
-        return $this->belongsTo(Post::class);
+        return $this->withoutGlobalScope('approved');
     }
 
     public function approve()
     {
         $this->is_approved = true;
         $this->save();
+    }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
     }
 }
