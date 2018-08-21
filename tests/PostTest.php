@@ -28,7 +28,7 @@ class PostTest extends TestCase
     }
 
     /** @test */
-    public function a_post_is_made_draft_by_default()
+    public function a_post_is_draft_by_default()
     {
         $post = factory(Post::class)->create();
 
@@ -63,5 +63,33 @@ class PostTest extends TestCase
 
         $this->assertCount(1, $posts);
         $this->assertTrue($posts->first()->is($publishedPost));
+    }
+
+    /** @test */
+    public function a_post_generates_a_slug_from_its_title_by_default()
+    {
+        $post = factory(Post::class)->create(['title' => 'Example Title']);
+
+        $this->assertEquals('example-title', $post->slug);
+    }
+
+    /** @test */
+    public function a_post_can_have_a_custom_slug()
+    {
+        $post = factory(Post::class)->create([
+            'title' => 'Post Title',
+            'slug' => 'post-slug'
+        ]);
+
+        $this->assertEquals('post-slug', $post->slug);
+    }
+
+    /** @test */
+    public function a_post_generates_a_unique_slug()
+    {
+        $postOne = factory(Post::class)->create(['title' => 'Duplicate Title']);
+        $postTwo = factory(Post::class)->create(['title' => 'Duplicate Title']);
+
+        $this->assertNotEquals($postOne->slug, $postTwo->slug);
     }
 }
