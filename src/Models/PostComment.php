@@ -3,12 +3,26 @@
 namespace Optimus\Posts\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class PostComment extends Model
 {
-    protected $fillable = [
-        'body', 'author_name', 'author_email', 'author_website', 'is_approved'
+    protected $casts = [
+        'is_approved' => 'bool'
     ];
+
+    protected $fillable = [
+        'body', 'name', 'email', 'website', 'is_approved'
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::addGlobalScope('approved', function ($query) {
+            $query->where('is_approved', true);
+        });
+    }
 
     public function post()
     {
@@ -17,6 +31,7 @@ class PostComment extends Model
 
     public function approve()
     {
-        $this->update(['is_approved' => true]);
+        $this->is_approved = true;
+        $this->save();
     }
 }

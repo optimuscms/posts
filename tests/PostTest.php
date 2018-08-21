@@ -54,9 +54,7 @@ class PostTest extends TestCase
     /** @test */
     public function draft_posts_are_excluded_by_default()
     {
-        $publishedPost = factory(Post::class)->create([
-            'published_at' => now()
-        ]);
+        $publishedPost = factory(Post::class)->state('published')->create();
 
         $draftPost = factory(Post::class)->create();
 
