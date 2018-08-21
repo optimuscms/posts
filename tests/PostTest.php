@@ -17,9 +17,9 @@ class PostTest extends TestCase
     {
         $post = factory(Post::class)->create();
 
-        $categories = factory(PostCategory::class, 3)->create();
-
-        $post->categories()->attach($categories);
+        $post->categories()->attach(
+            $categories = factory(PostCategory::class, 3)->create()
+        );
 
         $this->assertInstanceOf(
             EloquentCollection::class, $post->categories
@@ -65,11 +65,11 @@ class PostTest extends TestCase
     }
 
     /** @test */
-    public function a_post_generates_a_slug_from_its_title_by_default()
+    public function a_post_generates_a_slug_from_its_title()
     {
-        $post = factory(Post::class)->create(['title' => 'Example Title']);
+        $post = factory(Post::class)->create(['title' => 'Post Title']);
 
-        $this->assertEquals('example-title', $post->slug);
+        $this->assertEquals('post-title', $post->slug);
     }
 
     /** @test */

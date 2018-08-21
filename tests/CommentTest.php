@@ -61,4 +61,12 @@ class CommentTest extends TestCase
         $this->assertCount(1, $comments);
         $this->assertTrue($comments->first()->is($approvedComment));
     }
+
+    /** @test */
+    public function unapproved_comments_can_be_retrieved()
+    {
+        // Todo
+
+        $this->assertTrue(true);
+    }
 }
