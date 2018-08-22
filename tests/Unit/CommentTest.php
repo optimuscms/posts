@@ -1,8 +1,9 @@
 <?php
 
-namespace Optimus\Posts\Tests;
+namespace Optimus\Posts\Tests\Unit;
 
 use Optimus\Posts\Models\Post;
+use Optimus\Posts\Tests\TestCase;
 use Optimus\Posts\Models\PostComment;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 

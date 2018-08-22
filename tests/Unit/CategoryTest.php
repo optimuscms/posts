@@ -1,8 +1,9 @@
 <?php
 
-namespace Optimus\Posts\Tests;
+namespace Optimus\Posts\Tests\Unit;
 
 use Optimus\Posts\Models\Post;
+use Optimus\Posts\Tests\TestCase;
 use Optimus\Posts\Models\PostCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -17,7 +18,7 @@ class CategoryTest extends TestCase
         $category = factory(PostCategory::class)->create();
 
         $category->posts()->attach(
-            $posts = factory(Post::class, 3)->create()
+            $posts = factory(Post::class, 3)->state('published')->create()
         );
 
         $this->assertInstanceOf(
@@ -52,8 +53,11 @@ class CategoryTest extends TestCase
     public function a_category_generates_a_unique_slug()
     {
         $categoryOne = factory(PostCategory::class)->create(['name' => 'Duplicate Name']);
-        $categoryTwo = factory(PostCategory::class)->create(['name' => 'Duplicate Name']);
+        $categoryTwo = factory(PostCategory::class)->create(['slug' => 'duplicate-name']);
+        $categoryThree = factory(PostCategory::class)->create(['name' => 'Duplicate Name']);
 
-        $this->assertNotEquals($categoryOne->slug, $categoryTwo->slug);
+        $this->assertEquals('duplicate-name', $categoryOne->slug);
+        $this->assertEquals('duplicate-name-1', $categoryTwo->slug);
+        $this->assertEquals('duplicate-name-2', $categoryThree->slug);
     }
 }

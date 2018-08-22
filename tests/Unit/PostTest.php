@@ -1,8 +1,9 @@
 <?php
 
-namespace Optimus\Posts\Tests;
+namespace Optimus\Posts\Tests\Unit;
 
 use Optimus\Posts\Models\Post;
+use Optimus\Posts\Tests\TestCase;
 use Optimus\Posts\Models\PostComment;
 use Optimus\Posts\Models\PostCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -92,11 +93,13 @@ class PostTest extends TestCase
         $this->assertNotEquals($postOne->slug, $postTwo->slug);
     }
 
-//    /** @test */
-//    public function a_post_can_have_media()
-//    {
-//
-//    }
+    /** @test */
+    public function a_post_can_have_media()
+    {
+        // Todo
+
+        $this->assertTrue(true);
+    }
 
     /** @test */
     public function a_post_can_have_comments()
