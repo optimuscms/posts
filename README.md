@@ -57,7 +57,7 @@ GET /admin/api/posts
 
 **Parameters**
 
-@todo
+None
 
 **Example Response**
 
@@ -135,7 +135,7 @@ GET /admin/api/comments
 
 **Parameters**
 
-@todo
+None
 
 **Example Response**
 
@@ -186,7 +186,7 @@ GET /admin/api/tags
 
 **Parameters**
 
-@todo
+None
 
 **Example Response**
 
