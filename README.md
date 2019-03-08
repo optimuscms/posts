@@ -73,7 +73,9 @@ GET /admin/api/posts{id}
 
 **Parameters**
 
-@todo
+| Parameter | Required? | Type  | Description    |
+|-----------|-----------|-------|----------------|
+| id      |    ✓      | int  | The ID of the post to fetch |
 
 **Example Response**
 
@@ -151,7 +153,9 @@ GET /admin/api/comments/{id}
 
 **Parameters**
 
-@todo
+| Parameter | Required? | Type  | Description    |
+|-----------|-----------|-------|----------------|
+| id      |    ✓      | int  | The ID of the comment to fetch |
 
 **Example Response**
 
@@ -202,7 +206,9 @@ GET /admin/api/tags{id}
 
 **Parameters**
 
-@todo
+| Parameter | Required? | Type  | Description    |
+|-----------|-----------|-------|----------------|
+| id      |    ✓      | int  | The ID of the tag to fetch |
 
 **Example Response**
 
