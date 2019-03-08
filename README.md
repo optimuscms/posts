@@ -110,7 +110,7 @@ GET /admin/api/posts{id}
 
 | Parameter | Required? | Type  | Description    |
 |-----------|-----------|-------|----------------|
-| id      |    ✓      | int  | The ID of the post to fetch |
+| id        |    ✓      | int   | The ID of the post to fetch |
 
 
 <a name="example-single-post-response"></a>
@@ -157,7 +157,14 @@ POST /admin/api/posts
 
 **Parameters**
 
-@todo
+| Parameter | Required? | Type  | Description    |
+|-----------|-----------|-------|----------------|
+| title     |    ✓      | string| The title of the post |
+| body      |    ✓      | string| The main content of the post |
+| tags      |    ✓      | array | An array of at least one tag name |
+| image     |    ✗      | int   | The ID of an existing image |
+| published_at|    ✗    | date  | The date of publication |
+
 
 **Example Response**
 
@@ -173,7 +180,14 @@ PATCH /admin/api/posts/{id}
 
 **Parameters**
 
-@todo
+| Parameter | Required? | Type  | Description    |
+|-----------|-----------|-------|----------------|
+| title     |    ✓      | string| The title of the post |
+| body      |    ✓      | string| The main content of the post |
+| tags      |    ✓      | array | An array of at least one tag name |
+| image     |    ✗      | int   | The ID of an existing image |
+| published_at|  ✗      | date  | The date of publication |
+
 
 **Example Response**
 
@@ -191,7 +205,7 @@ DELETE /admin/api/posts/{id}
 
 | Parameter | Required? | Type  | Description    |
 |-----------|-----------|-------|----------------|
-| id      |    ✓      | int  | The ID of the post to delete |
+| id        |    ✓      | int   | The ID of the post to delete |
 
 **Example Response**
 
@@ -210,7 +224,28 @@ None
 
 **Example Response**
 
-@todo
+```json5
+[
+    {
+        "id": 142,
+        "body": "I love this post",
+        "author_name": "Max Carter",
+        "author_email": "max@example.com",
+        "author_website": "www.example.com",
+        "created_at": "2019-02-19 09:14:44",
+        "updated_at": "2019-02-19 09:14:50"
+    },
+    {
+        "id": 143,
+        "body": "Thanks for posting this article, it was really helpful",
+        "author_name": "Janet Parker",
+        "author_email": "janet@example.com",
+        "author_website": null,
+        "created_at": "2019-03-22 12:04:50",
+        "updated_at": "2019-02-22 12:04:50"
+    },
+]
+```
 
 
 <a name="comments-get"></a>
@@ -224,12 +259,21 @@ GET /admin/api/comments/{id}
 
 | Parameter | Required? | Type  | Description    |
 |-----------|-----------|-------|----------------|
-| id      |    ✓      | int  | The ID of the comment to fetch |
+| id        |    ✓      | int   | The ID of the comment to fetch |
 
 **Example Response**
 
-@todo
-
+```json5
+{
+    "id": 142,
+    "body": "I love this post",
+    "author_name": "Max Carter",
+    "author_email": "max@example.com",
+    "author_website": "www.example.com",
+    "created_at": "2019-02-19 09:14:44",
+    "updated_at": "2019-02-19 09:14:50"
+}
+```
 
 <a name="comments-delete"></a>
 ### Delete comment
@@ -242,7 +286,7 @@ DELETE /admin/api/comments/{id}
 
 | Parameter | Required? | Type  | Description    |
 |-----------|-----------|-------|----------------|
-| id      |    ✓      | int  | The ID of the comment to delete |
+| id        |    ✓      | int   | The ID of the comment to delete |
 
 **Example Response**
 
@@ -294,7 +338,7 @@ GET /admin/api/tags{id}
 
 | Parameter | Required? | Type  | Description    |
 |-----------|-----------|-------|----------------|
-| id      |    ✓      | int  | The ID of the tag to fetch |
+| id      |    ✓        | int   | The ID of the tag to fetch |
 
 
 <a name="example-single-tag-response"></a>
