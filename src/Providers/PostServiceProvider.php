@@ -24,7 +24,7 @@ class PostServiceProvider extends ServiceProvider
 
     protected function mapAdminRoutes()
     {
-        Route::prefix('api')
+        Route::prefix('admin/api')
              ->middleware('api', 'auth:admin')
              ->namespace($this->controllerNamespace)
              ->group(function () {
