@@ -61,7 +61,42 @@ None
 
 **Example Response**
 
-@todo
+```json5
+[
+    {
+        "id": 46,
+        "title": "Cras sapien ligula",
+        "image": {
+             "id": 356,
+             "folder_id": 12, 
+             "name": "My Image", 
+             "file_name": "my_image.jpg",
+             "disk": "local",
+             "mime_type": "image/jpeg", 
+             "size": 102400,
+             "created_at": "2017-12-24 09:36:23",
+             "updated_at": "2017-12-25 10:15:12"
+        },
+        "slug": "cras-sapien",
+        "body": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+        "tags": [
+            {
+                "id": 22,
+                "name": "Marketing",
+                "slug": "marketing",
+                "created_at": "2019-02-19 09:16:10",
+                "updated_at": "2019-02-19 09:16:10"
+            },
+        ],
+        "published_at": "2019-02-19 09:14:44",
+        "created_at": "2019-02-19 09:14:44",
+        "updated_at": "2019-02-19 09:14:50"
+    },
+    {
+      // ...details of second post
+    }
+]
+```
 
 
 <a name="posts-get"></a>
@@ -77,9 +112,41 @@ GET /admin/api/posts{id}
 |-----------|-----------|-------|----------------|
 | id      |    ✓      | int  | The ID of the post to fetch |
 
+
+<a name="example-single-post-response"></a>
 **Example Response**
 
-@todo
+```json5
+{
+    "id": 46,
+    "title": "Cras sapien ligula",
+    "image": {
+         "id": 356,
+         "folder_id": 12, 
+         "name": "My Image", 
+         "file_name": "my_image.jpg",
+         "disk": "local",
+         "mime_type": "image/jpeg", 
+         "size": 102400,
+         "created_at": "2017-12-24 09:36:23",
+         "updated_at": "2017-12-25 10:15:12"
+    },
+    "slug": "cras-sapien",
+    "body": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+    "tags": [
+        {
+            "id": 22,
+            "name": "Marketing",
+            "slug": "marketing",
+            "created_at": "2019-02-19 09:16:10",
+            "updated_at": "2019-02-19 09:16:10"
+        },
+    ],
+    "published_at": "2019-02-19 09:14:44",
+    "created_at": "2019-02-19 09:14:44",
+    "updated_at": "2019-02-19 09:14:50"
+}
+```
 
 <a name="posts-create"></a>
 ### Create post
@@ -94,7 +161,8 @@ POST /admin/api/posts
 
 **Example Response**
 
-@todo
+The newly created post is returned in the same format 
+as [getting a single post](#example-single-post-response).
 
 <a name="posts-update"></a>
 ### Update post
@@ -109,7 +177,8 @@ PATCH /admin/api/posts/{id}
 
 **Example Response**
 
-@todo
+The updated post is returned in the same format 
+as [getting a single post](#example-single-post-response).
 
 <a name="posts-delete"></a>
 ### Delete post
@@ -194,7 +263,24 @@ None
 
 **Example Response**
 
-@todo
+```json5
+[
+    {
+        "id": 21,
+        "name": "Top Tips",
+        "slug": "top-tips",
+        "created_at": "2019-02-19 09:14:44",
+        "updated_at": "2019-02-19 09:14:50"
+    },
+    {
+        "id": 22,
+        "name": "Marketing",
+        "slug": "marketing",
+        "created_at": "2019-02-19 09:16:10",
+        "updated_at": "2019-02-19 09:16:10"
+    },
+]
+```
 
 
 <a name="tags-get"></a>
@@ -210,9 +296,19 @@ GET /admin/api/tags{id}
 |-----------|-----------|-------|----------------|
 | id      |    ✓      | int  | The ID of the tag to fetch |
 
+
+<a name="example-single-tag-response"></a>
 **Example Response**
 
-@todo
+```json5
+{
+    "id": 21,
+    "name": "Top Tips",
+    "slug": "top-tips",
+    "created_at": "2019-02-19 09:14:44",
+    "updated_at": "2019-02-19 09:14:50"
+}
+```
 
 <a name="tags-create"></a>
 ### Create tag
@@ -223,11 +319,14 @@ POST /admin/api/tags
 
 **Parameters**
 
-@todo
+| Parameter | Required? | Type  | Description    |
+|-----------|-----------|-------|----------------|
+| name      |    ✓      | string| The user-facing name for the tag |
 
 **Example Response**
 
-@todo
+The newly created tag is returned in the same format 
+as [getting a single tag](#example-single-tag-response).
 
 <a name="tags-update"></a>
 ### Update tag
@@ -238,11 +337,15 @@ PATCH /admin/api/tags/{id}
 
 **Parameters**
 
-@todo
+| Parameter | Required? | Type  | Description    |
+|-----------|-----------|-------|----------------|
+| id        |    ✓      | int   | The ID of the tag to update |
+| name      |    ✓      | string| A new user-facing name for the tag |
 
 **Example Response**
 
-@todo
+The newly created tag is returned in the same format 
+as [getting a single tag](#example-single-tag-response).
 
 <a name="tags-delete"></a>
 ### Delete tag
