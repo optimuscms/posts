@@ -118,11 +118,13 @@ DELETE /admin/api/posts/{id}
 
 **Parameters**
 
-@todo
+| Parameter | Required? | Type  | Description    |
+|-----------|-----------|-------|----------------|
+| id      |    ✓      | int  | The ID of the post to delete |
 
 **Example Response**
 
-@todo
+The HTTP status code will be 204 if successful.
 
 <a name="comments-all"></a>
 ### List comments
@@ -165,11 +167,13 @@ DELETE /admin/api/comments/{id}
 
 **Parameters**
 
-@todo
+| Parameter | Required? | Type  | Description    |
+|-----------|-----------|-------|----------------|
+| id      |    ✓      | int  | The ID of the comment to delete |
 
 **Example Response**
 
-@todo
+The HTTP status code will be 204 if successful.
 
 
 
@@ -243,8 +247,10 @@ DELETE /admin/api/tags/{id}
 
 **Parameters**
 
-@todo
+| Parameter | Required? | Type  | Description    |
+|-----------|-----------|-------|----------------|
+| id      |    ✓      | int  | The ID of the tag to delete |
 
 **Example Response**
 
-@todo
+The HTTP status code will be 204 if successful.
